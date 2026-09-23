@@ -3,10 +3,10 @@ logs
 *.log
 npm-debug.log*
 
-# Dependencies
+# Dependencias
 node_modules
 
-# Build output
+# Build del frontend
 dist
 dist-ssr
 *.local
@@ -14,6 +14,20 @@ dist-ssr
 
 # Firebase
 .firebase
+
+# Python / Django
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.sqlite3
+backend/media/
+backend/staticfiles/
+
+# Secretos: nunca al repositorio
+.env
+*.env
+!.env.example
 
 # Editor
 .vscode/*

@@ -41,6 +41,14 @@ export default {
       backgroundImage: {
         'grad-hero': 'var(--grad-hero)',
         'grad-cta': 'var(--grad-cta)',
+        'grad-panel': 'var(--grad-panel)',
+        'grad-card': 'var(--grad-card)',
+        'grad-barra': 'var(--grad-barra)',
+        'grad-boton': 'var(--grad-boton)',
+        'grad-activo': 'var(--grad-activo)',
+        'grad-menu': 'var(--grad-menu)',
+        'grad-menu-activo': 'var(--grad-menu-activo)',
+        'grad-campo': 'var(--grad-campo)',
       },
       borderRadius: {
         sm: 'var(--r-sm)',
@@ -52,6 +60,9 @@ export default {
         card: 'var(--sh-card)',
         hover: 'var(--sh-hover)',
         fab: 'var(--sh-fab)',
+        soft: 'var(--sh-soft)',
+        lift: 'var(--sh-lift)',
+        boton: 'var(--sh-boton)',
       },
       maxWidth: {
         container: '1280px',
@@ -65,9 +76,38 @@ export default {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(-10px)' },
         },
+        // Entrada de las piezas del panel: suben unos píxeles mientras
+        // aparecen. Es corta a propósito; una animación larga en algo que se
+        // abre veinte veces al día cansa.
+        entrar: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        // Brillo que cruza una superficie. Se usa solo en el saludo.
+        brillo: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        // El cajon de edicion entra deslizando desde el borde derecho. Se
+        // mueve poco y rapido: lo que importa es entender de donde sale, no
+        // mirar la animacion.
+        'entrada-lateral': {
+          '0%': { opacity: '0', transform: 'translateX(24px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        deriva: {
+          '0%': { transform: 'translate(0, 0) rotate(0deg)' },
+          '50%': { transform: 'translate(10px, -14px) rotate(6deg)' },
+          '100%': { transform: 'translate(0, 0) rotate(0deg)' },
+        },
       },
       animation: {
         float: 'float 6s ease-in-out infinite alternate',
+        entrar: 'entrar 0.45s cubic-bezier(0.22, 1, 0.36, 1) both',
+        brillo: 'brillo 9s ease-in-out infinite',
+        deriva: 'deriva 14s ease-in-out infinite',
+        'entrada-lateral': 'entrada-lateral 0.28s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },
