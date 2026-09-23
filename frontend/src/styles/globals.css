@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Color */
+  --brand-900: #3f3170;
+  --brand-700: #6b5bae;
+  --brand-500: #8f7fcb;
+  --brand-300: #c7bce9;
+  --brand-100: #ede7fb;
+  --brand-50: #f8f5fe;
+  --peri-500: #7b93da;
+  --blush-300: #f4b6ce;
+  --blush-100: #fbe3ee;
+  --ink: #2e2743;
+  --muted: #6f6885;
+  --line: #e9e2f7;
+  --wa: #25d366;
+  --surface: #ffffff;
+
+  /* RGB triplets — enable Tailwind opacity modifiers (bg-brand-700/35, etc.) */
+  --brand-900-rgb: 63 49 112;
+  --brand-700-rgb: 107 91 174;
+  --brand-500-rgb: 143 127 203;
+  --brand-300-rgb: 199 188 233;
+  --brand-100-rgb: 237 231 251;
+  --brand-50-rgb: 248 245 254;
+  --peri-500-rgb: 123 147 218;
+  --blush-300-rgb: 244 182 206;
+  --blush-100-rgb: 251 227 238;
+  --ink-rgb: 46 39 67;
+  --muted-rgb: 111 104 133;
+  --line-rgb: 233 226 247;
+  --wa-rgb: 37 211 102;
+  --surface-rgb: 255 255 255;
+
+  /* Gradients */
+  --grad-hero: linear-gradient(105deg, #fbfaff 0%, #f3eefd 45%, #fbe3ee 100%);
+  --grad-cta: linear-gradient(135deg, #6b5bae 0%, #7b93da 100%);
+
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-script: 'Parisienne', cursive;
+  --font-body: 'Nunito', sans-serif;
+
+  /* Radii */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-full: 999px;
+
+  /* Shadows
+     Todas tiran a lila en vez de a negro. Una sombra gris sobre un fondo
+     lila se ve sucia; teñida del color de la marca, el conjunto se siente
+     de una pieza. Van en dos capas —una pegada al borde y otra difusa— que
+     es lo que da sensación de relieve en lugar de una mancha plana. */
+  --sh-card: 0 1px 2px rgba(63, 49, 112, 0.04), 0 2px 10px rgba(107, 91, 174, 0.06);
+  --sh-hover: 0 2px 4px rgba(63, 49, 112, 0.06), 0 12px 32px rgba(107, 91, 174, 0.16);
+  --sh-fab: 0 8px 24px rgba(37, 211, 102, 0.35);
+  --sh-soft: 0 1px 2px rgba(63, 49, 112, 0.05), 0 4px 16px rgba(107, 91, 174, 0.08);
+  --sh-lift: 0 4px 8px rgba(63, 49, 112, 0.06), 0 20px 44px rgba(107, 91, 174, 0.18);
+  /* Sombra del botón principal: lleva el color del propio botón, así parece
+     que la pieza está encendida y no solo apoyada. */
+  --sh-boton: 0 2px 6px rgba(107, 91, 174, 0.28), 0 8px 20px rgba(107, 91, 174, 0.22);
+
+  /* Superficies con relieve.
+     Una tarjeta de un solo color plano no se despega del fondo. Un degradado
+     casi imperceptible de arriba abajo imita cómo cae la luz sobre algo que
+     sobresale, y basta para que el ojo la lea como una pieza levantada. */
+  --grad-panel: radial-gradient(1200px 600px at 15% -10%, #f3eefd 0%, transparent 55%),
+                radial-gradient(900px 500px at 100% 0%, #fbe3ee 0%, transparent 50%),
+                linear-gradient(180deg, #fbfaff 0%, #f8f5fe 100%);
+  --grad-card: linear-gradient(170deg, #ffffff 0%, #fdfcff 55%, #f8f5fe 100%);
+  --grad-barra: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 245, 254, 0.9) 100%);
+  --grad-boton: linear-gradient(135deg, #7d6bc0 0%, #6b5bae 55%, #5b4c99 100%);
+  --grad-activo: linear-gradient(135deg, #7d6bc0 0%, #6b5bae 100%);
+
+  /* El menu lateral va oscuro y el contenido claro.
+     Es lo que separa de un vistazo "donde estoy" de "que estoy editando":
+     con todo del mismo tono claro, el menu y el contenido se leen como una
+     sola superficie y hay que fijarse para distinguirlos. */
+  --grad-menu: linear-gradient(165deg, #4a3a80 0%, #3f3170 45%, #332a5c 100%);
+  --grad-menu-activo: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.1) 100%);
+  /* Fondo de los campos de formulario. Un blanco plano sobre una tarjeta
+     blanca no se ve como un hueco donde escribir; este, levemente hundido,
+     si. */
+  --grad-campo: linear-gradient(180deg, #f8f5fe 0%, #fdfcff 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink);
+  background-color: var(--surface);
+  font-family: var(--font-body);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-700);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Transición entre páginas
+
+   Se usa la API de transiciones de vista del navegador: la animación corre en
+   el compositor, no en JavaScript, así que no cuesta rendimiento ni suma peso
+   al sitio. Solo se animan opacidad y desplazamiento, que no obligan a
+   recalcular el diseño.
+
+   El encabezado, el pie y el botón de WhatsApp llevan nombre propio: al ser
+   iguales en todas las páginas, el navegador los mantiene en su sitio en vez
+   de desvanecerlos, y solo cambia el contenido del medio.
+--------------------------------------------------------------------------- */
+/* La página nueva "florece": entra creciendo un poco desde abajo. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.99);
+  }
+}
+
+header {
+  view-transition-name: encabezado;
+}
+
+footer {
+  view-transition-name: pie;
+}
+
+.fab-whatsapp {
+  view-transition-name: boton-whatsapp;
+}
+
+::view-transition-old(root) {
+  animation: page-out 240ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+/* Entra un pelín después, para que se note el relevo entre una y otra. */
+::view-transition-new(root) {
+  animation: page-in 560ms cubic-bezier(0.16, 1, 0.3, 1) 90ms both;
+}
+
+/* Navegadores sin transiciones de vista (Firefox antiguo): al menos la
+   página nueva entra suave. */
+@supports not (view-transition-name: none) {
+  main {
+    animation: page-in 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  main {
+    animation: none !important;
+  }
+}
