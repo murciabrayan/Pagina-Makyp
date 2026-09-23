@@ -22,21 +22,14 @@ WhatsApp: el primero que lo abriera se encontraría la pantalla colgada.
 ## Antes de empezar
 
 Northflank despliega **desde GitHub**, así que el código tiene que estar
-subido. A día de hoy el repositorio solo tiene el commit inicial: el backend
-entero está sin subir.
-
-```bash
-cd C:\Users\User\Downloads\makyp
-git add -A
-git commit -m "Backend, panel de administración y armador interactivo"
-git push
-```
-
-Comprueba en `github.com/murciabrayan/Pagina-Makyp` que aparece la carpeta
-`backend/`. Si no está, nada de lo que sigue funcionará.
+subido. Ya lo está: en `github.com/murciabrayan/Pagina-Makyp` aparecen las
+carpetas `frontend/` y `backend/`, esta última con sus 56 archivos y el
+`Dockerfile`.
 
 > Los archivos `.env` están excluidos del repositorio a propósito: las claves
 > nunca se suben, se escriben en el panel de cada servicio.
+
+Ten a mano el nombre del repositorio y la rama (`master`).
 
 ---
 
@@ -46,16 +39,24 @@ Comprueba en `github.com/murciabrayan/Pagina-Makyp` que aparece la carpeta
    cuenta. En **R2** te pedirá una tarjeta para activarlo; no cobra nada
    dentro de los 10 GB.
 2. **Create bucket**, nómbralo `makyp-fotos`, región automática.
-3. Dentro del bucket, pestaña **Settings** → **Public access** → habilita
-   **R2.dev subdomain**. Copia la dirección que te da, algo como
+3. Dentro del bucket, pestaña **Settings**, busca el apartado **Public
+   Development URL** y habilítalo. Copia la dirección que te da, algo como
    `https://pub-xxxxx.r2.dev`.
+
+   > En la documentación y en muchos tutoriales esto aparece como "R2.dev
+   > subdomain": es lo mismo, Cloudflare le cambió el nombre. Si ves
+   > *"The public development URL is disabled for this bucket"*, estás en el
+   > sitio correcto.
 4. Vuelve a **R2** → **Manage API Tokens** → **Create API Token**:
    - Permiso: **Object Read & Write**
    - Alcance: solo el bucket `makyp-fotos`
 5. Apunta estos cuatro datos, que no se vuelven a mostrar:
    - **Access Key ID**
    - **Secret Access Key**
-   - **Endpoint** (sale como `https://<id-de-cuenta>.r2.cloudflarestorage.com`)
+   - **Endpoint**: en el apartado **S3 API** del bucket verás algo como
+     `https://<id-de-cuenta>.r2.cloudflarestorage.com/makyp-fotos`. Copia
+     solo hasta `.com`, **sin** `/makyp-fotos` al final: el nombre del
+     bucket va aparte, en su propia variable.
    - La dirección pública del punto 3
 
 ---
