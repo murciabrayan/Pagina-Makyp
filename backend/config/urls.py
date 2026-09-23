@@ -13,6 +13,7 @@ claras:
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.http import JsonResponse
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
@@ -35,6 +36,20 @@ from apps.content.views import (
     ValuePropViewSet,
 )
 
+
+def salud(_request):
+    """
+    Señal de vida del servidor, sin tocar la base de datos.
+
+    La plataforma consulta esto cada pocos segundos, y una tarea programada
+    cada diez minutos, para que el servicio no se apague por inactividad. Si
+    la consulta llegara a la base, la mantendría encendida también a ella, y
+    la base se cobra por horas encendida y no por uso. Así la base solo
+    despierta cuando entra una persona de verdad.
+    """
+    return JsonResponse({"estado": "ok"})
+
+
 router = DefaultRouter()
 router.register("catalog/categories", CategoryViewSet, basename="category")
 router.register("catalog/products", ProductViewSet, basename="product")
@@ -51,6 +66,8 @@ router.register("content/site", SiteSettingsViewSet, basename="sitesettings")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # señal de vida para la plataforma
+    path("api/salud/", salud, name="salud"),
     # autenticación
     path("api/auth/login/", LoginView.as_view(), name="login"),
     path("api/auth/refresh/", RefreshView.as_view(), name="refresh"),

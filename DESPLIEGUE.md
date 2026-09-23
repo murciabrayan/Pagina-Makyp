@@ -1,30 +1,36 @@
 # Poner Makyp Creations en internet
 
-Guía para desplegar el sitio completo **gratis**. Calcula una hora la primera
-vez; las siguientes actualizaciones son un `git push`.
+Guía para desplegar el sitio completo **gratis y sin dar tarjeta** (salvo
+Cloudflare, que ya tienes hecho). Calcula una hora la primera vez; las
+siguientes actualizaciones son un `git push`.
 
 ## Cómo queda repartido
 
 | Parte | Dónde | Por qué ahí |
 | --- | --- | --- |
 | La tienda (React) | **Firebase Hosting** | Ya está configurado y funcionando |
-| La API (Django) | **Northflank** | Es el único plan gratis que **no apaga** el servicio |
-| La base de datos | **Northflank** | Va incluida, en la misma red que la API |
+| La API (Django) | **Render** | Plan gratis sin tarjeta |
+| La base de datos | **Neon** | Gratis para siempre, sin tarjeta y **no borra los datos** |
 | Las fotos que sube Maira | **Cloudflare R2** | 10 GB gratis y sin cobro por descargas |
 
-**Por qué no Render**, que es lo más recomendado por ahí: su PostgreSQL gratis
-**se borra a los 30 días** de creado, y el servicio duerme a los 15 minutos
-tardando casi un minuto en despertar. Tus clientes llegan por un enlace de
-WhatsApp: el primero que lo abriera se encontraría la pantalla colgada.
+**Por qué la base va aparte y no en Render.** El PostgreSQL gratuito de Render
+**se borra a los 30 días** de creado: pasado ese mes tendrías que empezar de
+cero. El de Neon no caduca; se duerme si nadie lo usa, pero despierta en menos
+de medio segundo y los datos siguen intactos.
+
+**Lo único que hay que vigilar de Render** es que apaga el servicio tras 15
+minutos sin visitas, y volver a encenderlo tarda casi un minuto. Como tus
+clientes llegan por un enlace de WhatsApp, el primero que lo abriera se
+encontraría la pantalla colgada. El **paso 6** lo resuelve con una visita
+automática cada 10 minutos, gratis y sin tarjeta.
 
 ---
 
 ## Antes de empezar
 
-Northflank despliega **desde GitHub**, así que el código tiene que estar
-subido. Ya lo está: en `github.com/murciabrayan/Pagina-Makyp` aparecen las
-carpetas `frontend/` y `backend/`, esta última con sus 56 archivos y el
-`Dockerfile`.
+Render despliega **desde GitHub**, así que el código tiene que estar subido.
+Ya lo está: en `github.com/murciabrayan/Pagina-Makyp` aparecen las carpetas
+`frontend/` y `backend/`, esta última con sus 56 archivos y el `Dockerfile`.
 
 > Los archivos `.env` están excluidos del repositorio a propósito: las claves
 > nunca se suben, se escriben en el panel de cada servicio.
@@ -34,6 +40,9 @@ Ten a mano el nombre del repositorio y la rama (`master`).
 ---
 
 ## Paso 1 · Las fotos (Cloudflare R2)
+
+*Si ya lo hiciste, salta al paso 2; solo necesitas tener apuntados los cinco
+datos del punto 5.*
 
 1. Entra en [dash.cloudflare.com](https://dash.cloudflare.com) y crea una
    cuenta. En **R2** te pedirá una tarjeta para activarlo; no cobra nada
@@ -61,39 +70,53 @@ Ten a mano el nombre del repositorio y la rama (`master`).
 
 ---
 
-## Paso 2 · La base de datos (Northflank)
+## Paso 2 · La base de datos (Neon)
 
-1. Entra en [northflank.com](https://northflank.com) y regístrate con GitHub.
-   Pedirá tarjeta; el plan **Sandbox** es gratis para siempre y no cobra
-   mientras no subas de plan.
-2. **Create new** → **Project**, nómbralo `makyp`, región la más cercana.
-3. Dentro del proyecto: **Add new** → **Addon** → **PostgreSQL**.
-   - Plan: el gratuito del Sandbox
-   - Versión: 16 o superior
-4. Cuando termine de crearse, entra en el addon → pestaña **Connection
-   Details** y copia la **connection string** (empieza por `postgres://`).
+1. Entra en [neon.tech](https://neon.tech) y regístrate con GitHub. **No pide
+   tarjeta**: el plan gratuito lo tienes activo desde el primer momento.
+2. Te crea un proyecto de entrada. Si te deja elegir, ponle `makyp` y escoge
+   la región más cercana a Colombia (**AWS us-east-1**, Virginia).
+3. Nada más crearse te muestra la **connection string**, algo así:
+
+```
+postgresql://usuario:clave@ep-algo-123456.us-east-1.aws.neon.tech/neondb?sslmode=require
+```
+
+   Cópiala entera y guárdala; la vas a usar dos veces, en los pasos 3 y 4. Si
+   cierras la ventana, está en **Dashboard** → **Connect**.
+
+> Neon apaga la base tras cinco minutos sin consultas y la reenciende sola al
+> llegar la siguiente. No se pierde nada y no hay que tocar nada: la primera
+> visita del día tarda medio segundo más.
 
 ---
 
-## Paso 3 · La API (Northflank)
+## Paso 3 · La API (Render)
 
-1. En el proyecto: **Add new** → **Service** → **Combined service**.
-2. Conecta tu repositorio de GitHub y elige la rama `master`.
-3. Configuración de la construcción:
-   - **Build type:** Dockerfile
-   - **Dockerfile path:** `/backend/Dockerfile`
-   - **Build context:** `/backend`
-4. **Port:** `8000`, protocolo HTTP, y marca **Publicly accessible**.
-5. En **Environment variables**, añade estas. Las tres primeras son las que
+1. Entra en [render.com](https://render.com) y regístrate con GitHub. El plan
+   gratuito **no pide tarjeta**.
+2. **New** → **Web Service** → conecta tu repositorio y elige la rama
+   `master`.
+3. Configuración:
+   - **Language / Runtime:** `Docker`
+   - **Root Directory:** `backend`
+   - **Dockerfile Path:** `backend/Dockerfile`
+   - **Instance Type:** **Free**
+
+   > Con *Root Directory* en `backend`, Render construye solo esa carpeta: no
+   > reconstruye nada cuando lo que cambias es la tienda.
+
+4. **Health Check Path:** `/api/salud/`
+5. En **Environment Variables**, añade estas. Las tres primeras son las que
    más se olvidan y las que dejan el sitio roto:
 
 ```
 DJANGO_SECRET_KEY        (genérala en el paso 3.1, más abajo)
 DJANGO_DEBUG             False
-DJANGO_ALLOWED_HOSTS     tu-servicio.northflank.app
+DJANGO_ALLOWED_HOSTS     tu-servicio.onrender.com
 DJANGO_CORS_ALLOWED_ORIGINS   https://makyp-6ed4d.web.app,https://makyp-6ed4d.firebaseapp.com
 DJANGO_CSRF_TRUSTED_ORIGINS   https://makyp-6ed4d.web.app,https://makyp-6ed4d.firebaseapp.com
-DATABASE_URL             (la del paso 2.4)
+DATABASE_URL             (la del paso 2.3, entera)
 R2_BUCKET                makyp-fotos
 R2_ENDPOINT              (el del paso 1.5)
 R2_ACCESS_KEY            (el del paso 1.5)
@@ -101,6 +124,10 @@ R2_SECRET_KEY            (el del paso 1.5)
 R2_DOMINIO_PUBLICO       pub-xxxxx.r2.dev      ← sin https://
 FRONTEND_ASSET_BASE_URL  https://makyp-6ed4d.web.app
 ```
+
+   El nombre exacto de `DJANGO_ALLOWED_HOSTS` lo sabrás al crear el servicio:
+   Render te da la dirección arriba del todo. Si te equivocas, la API
+   responde *"DisallowedHost"* y se arregla corrigiendo la variable.
 
 **3.1 · La clave secreta.** Es lo que firma las sesiones; si se filtra,
 cualquiera puede entrar al panel. Genera una nueva, distinta de la de tu
@@ -111,11 +138,11 @@ cd backend
 .venv\Scripts\python.exe -c "from django.core.management.utils import get_random_secret_key as k; print(k())"
 ```
 
-6. **Deploy**. El primer despliegue tarda unos minutos: instala las
-   dependencias, aplica las migraciones y arranca el servidor.
+6. **Create Web Service**. El primer despliegue tarda unos minutos: construye
+   la imagen, aplica las migraciones y arranca el servidor.
 
-Cuando termine, abre `https://tu-servicio.northflank.app/api/bootstrap/`.
-Debe responder un bloque de JSON. Si responde, la API y la base están bien.
+Cuando termine, abre `https://tu-servicio.onrender.com/api/bootstrap/`. Debe
+responder un bloque de JSON. Si responde, la API y la base están bien.
 
 > `FRONTEND_ASSET_BASE_URL` es lo que hace que las fotos que ya vivían en el
 > sitio (las 130 del armador) sigan viéndose: la API devuelve sus direcciones
@@ -125,17 +152,27 @@ Debe responder un bloque de JSON. Si responde, la API y la base están bien.
 
 ## Paso 4 · Llenar la base
 
-La base nueva está vacía: tiene las tablas pero ningún producto. En el panel
-de Northflank, entra en tu servicio → pestaña **Shell** y ejecuta:
+La base nueva está vacía: tiene las tablas pero ningún producto.
+
+El plan gratuito de Render **no incluye terminal**, así que esto se hace
+**desde tu máquina**, conectándote a la base de Neon. Es lo mismo y de hecho
+es más cómodo. En tu terminal, dentro de `backend`:
 
 ```bash
-python manage.py createsuperuser
-python manage.py cargar_datos_iniciales
+cd backend
+set DATABASE_URL=postgresql://...la-del-paso-2.3...
+.venv\Scripts\python.exe manage.py createsuperuser
+.venv\Scripts\python.exe manage.py cargar_datos_iniciales
 ```
 
 El primero crea tu usuario (ponle el mismo nombre que usas en local). El
 segundo carga los 17 productos, las 6 categorías, las 11 flores con sus 54
 variantes de color, las envolturas, los listones y todos los textos.
+
+> Ese `set DATABASE_URL=...` solo vale para esa ventana de terminal. Al
+> cerrarla, tu `.env` vuelve a mandar y sigues trabajando contra tu base
+> local sin tocar la de producción. Si usas PowerShell, la línea es
+> `$env:DATABASE_URL = "postgresql://..."`.
 
 ---
 
@@ -144,7 +181,7 @@ variantes de color, las envolturas, los listones y todos los textos.
 1. Abre `frontend/.env.production` y pon la dirección real de tu API:
 
 ```
-VITE_API_URL=https://tu-servicio.northflank.app/api
+VITE_API_URL=https://tu-servicio.onrender.com/api
 ```
 
 2. Compila y publica:
@@ -160,6 +197,32 @@ Listo: `https://makyp-6ed4d.web.app`.
 
 ---
 
+## Paso 6 · Que no se duerma
+
+Sin esto, Render apaga la API a los 15 minutos y la siguiente clienta que
+abra el enlace espera casi un minuto mirando una pantalla en blanco.
+
+1. Entra en [cron-job.org](https://cron-job.org) y crea una cuenta. Es
+   gratis y **no pide tarjeta**.
+2. **Create cronjob**:
+   - **Title:** `Despertar Makyp`
+   - **URL:** `https://tu-servicio.onrender.com/api/salud/`
+   - **Schedule:** cada **10 minutos**
+3. Guardar. A los pocos minutos verás la primera ejecución en verde.
+
+Con una visita cada 10 minutos el servicio no llega nunca a los 15 de
+inactividad, así que se queda despierto.
+
+`/api/salud/` existe justo para esto: responde `{"estado": "ok"}` **sin
+consultar la base**. Si el ping apuntara a `/api/bootstrap/`, mantendría
+encendida también a Neon las 24 horas, y Neon se cobra por horas encendida.
+Así la base solo despierta cuando entra una persona de verdad. El plan gratuito de Render da 750
+horas de servicio al mes y un mes tiene 730, así que estar encendido las 24
+horas **cabe justo** dentro de lo gratuito. Por eso conviene tener un solo
+servicio gratuito en esa cuenta: dos encendidos a la vez sí se pasarían.
+
+---
+
 ## Comprobaciones
 
 Repasa esto antes de darlo por bueno:
@@ -171,18 +234,21 @@ Repasa esto antes de darlo por bueno:
 - [ ] `/admin/login` te deja entrar con el usuario del paso 4
 - [ ] Desde el panel, **sube una foto** a un producto y compruebas que se ve
       (esa ya vive en R2)
-- [ ] Vuelve a entrar al día siguiente: la foto sigue ahí
+- [ ] Vuelve a entrar al día siguiente: la foto sigue ahí y la tienda abre
+      **al momento**, sin esperas
 
-Ese último punto es el que confirma que el almacenamiento está bien puesto.
-Si la foto desapareció, es que se guardó en el disco del servidor y se perdió
-en el siguiente despliegue: repasa las cinco variables `R2_`.
+Los dos últimos puntos son los que confirman que el almacenamiento y el ping
+están bien puestos. Si la foto desapareció, es que se guardó en el disco del
+servidor y se perdió en el siguiente despliegue: repasa las cinco variables
+`R2_`. Si la tienda tardó casi un minuto en abrir, mira las ejecuciones del
+cron-job: alguna estará en rojo.
 
 ---
 
 ## Después
 
-**Para actualizar el backend**, un `git push` a `master`: Northflank
-reconstruye y redespliega solo, aplicando las migraciones nuevas.
+**Para actualizar el backend**, un `git push` a `master`: Render reconstruye y
+redespliega solo, aplicando las migraciones nuevas.
 
 **Para actualizar la tienda**, `npm run build` y `firebase deploy`.
 
@@ -192,8 +258,8 @@ Hay que cambiar la dirección en cuatro sitios, y olvidarse de uno deja el
 sitio a medias:
 
 1. `DJANGO_ALLOWED_HOSTS`, `DJANGO_CORS_ALLOWED_ORIGINS` y
-   `DJANGO_CSRF_TRUSTED_ORIGINS` en Northflank
-2. `FRONTEND_ASSET_BASE_URL` en Northflank
+   `DJANGO_CSRF_TRUSTED_ORIGINS` en Render
+2. `FRONTEND_ASSET_BASE_URL` en Render
 3. Las etiquetas `og:` de `frontend/index.html` (la vista previa al compartir
    por WhatsApp)
 4. `frontend/public/robots.txt` y `frontend/public/sitemap.xml`
@@ -202,10 +268,13 @@ sitio a medias:
 
 | | Límite | Qué pasa al llegar |
 | --- | --- | --- |
-| Northflank | 2 servicios, 1 base de datos | No puedes añadir un tercer servicio |
+| Render | 750 horas de servicio al mes | El servicio se apaga hasta el mes siguiente |
+| Neon | 0,5 GB de base y 100 horas de cómputo al mes | Deja de aceptar escrituras; **los datos no se borran** |
 | Cloudflare R2 | 10 GB y 1 millón de subidas al mes | Empieza a cobrar por GB (unos 0,015 $) |
 | Firebase Hosting | 10 GB de tráfico al mes | Se corta hasta el mes siguiente |
 
 Con el tamaño de tu tienda (10 MB de base de datos y 6 MB de fotos) vas
-sobrado durante años. Lo primero que se quedaría corto sería el tráfico de
-Firebase, y eso solo con muchas visitas, que sería una buena noticia.
+sobrado durante años. Las **horas de cómputo de Neon** solo corren mientras
+alguien está usando la tienda de verdad, porque ni el chequeo de Render ni el
+ping del paso 6 tocan la base: suman unas tres horas al día de uso continuo
+antes de acercarse al límite.
