@@ -95,6 +95,20 @@ export function BouquetPreview({
   const piezaElegida = pieces.find((p) => p.key === elegida) ?? null
   const escalaActual = (elegida && state.ajustes[elegida]?.escala) || 1
 
+/**
+ * Las capas fijas del recuadro, de atras hacia delante.
+ *
+ * Estan aqui con nombre y no como numeros sueltos porque el boton de "enviar
+ * atras" necesita saber hasta donde puede bajar: si una flor cae por debajo
+ * de la envoltura, desaparece detras del papel y el cliente ya no puede ni
+ * seleccionarla para recuperarla.
+ */
+const Z_ENVOLTURA = 1
+const Z_SOMBRA = 2
+const Z_MONO = 600
+/** Lo mas atras que puede ir una flor: justo delante de la sombra. */
+const Z_SUELO = Z_SOMBRA + 1
+
   /** La capa más alta que hay ahora mismo, para traer algo por encima. */
   const capaMaxima = useMemo(
     () => pieces.reduce((mayor, p) => Math.max(mayor, p.zIndex), 0),
@@ -155,7 +169,9 @@ export function BouquetPreview({
     if (!piezaElegida || !onAjustar) return
     onAjustar(piezaElegida.key, {
       ...state.ajustes[piezaElegida.key],
-      z: hacia === 'frente' ? capaMaxima + 1 : capaMinima - 1,
+      // Hacia atras hay tope: por debajo de la sombra la flor se perderia
+      // detras de la envoltura.
+      z: hacia === 'frente' ? capaMaxima + 1 : Math.max(Z_SUELO, capaMinima - 1),
     })
   }
 
@@ -199,7 +215,7 @@ export function BouquetPreview({
             src={wrapper.image}
             alt={`Envoltura ${wrapper.label}`}
             className="absolute inset-0 h-full w-full object-contain"
-            style={{ zIndex: 1 }}
+            style={{ zIndex: Z_ENVOLTURA }}
             loading="eager"
           />
 
@@ -217,7 +233,7 @@ export function BouquetPreview({
                 // corrida hacia abajo: es la sombra que cae sobre el papel, no
                 // un halo alrededor del ramo
                 transform: 'translate(-50%, -34%)',
-                zIndex: 2,
+                zIndex: Z_SOMBRA,
                 background:
                   'radial-gradient(closest-side, rgba(74, 46, 64, 0.15), rgba(74, 46, 64, 0.05) 66%, rgba(74, 46, 64, 0))',
               }}
@@ -271,7 +287,7 @@ export function BouquetPreview({
                 top: `${wrapper.knot.y * 100}%`,
                 width: `${wrapper.knot.w * 100}%`,
                 height: 'auto',
-                zIndex: 600,
+                zIndex: Z_MONO,
                 transform: 'translate(-50%, -34%)',
                 filter: 'drop-shadow(0 2px 4px rgba(76, 48, 66, 0.28))',
               }}

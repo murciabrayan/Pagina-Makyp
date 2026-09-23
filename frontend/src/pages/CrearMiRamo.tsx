@@ -103,13 +103,25 @@ function Armador({ bundle }: { bundle: BuilderBundle }) {
    * dependen de cuantas haya—, asi que sin esto cada flor nueva reacomodaba
    * todo por debajo de lo que el cliente ya habia dejado a su gusto.
    */
-  const congelar = (previas: Record<string, PosicionFija>): Record<string, PosicionFija> => {
+  const congelar = (
+    previas: Record<string, PosicionFija>,
+    ajustes: Record<string, AjustePieza>,
+  ): Record<string, PosicionFija> => {
     const fijadas = { ...previas }
     for (const pieza of piezasActuales.current) {
+      // Se guarda donde la puso el motor, no donde se ve.
+      //
+      // El motor coloca la pieza y luego le suma el retoque del cliente; lo
+      // que llega aqui ya lo lleva dentro. Si se congelara tal cual, en el
+      // siguiente calculo el retoque se sumaria otra vez sobre una posicion
+      // que ya lo tenia, y la flor saldria disparada y del doble de tamaño.
+      // Por eso se le resta antes de guardar.
+      const ajuste = ajustes[pieza.key]
+      const escala = ajuste?.escala && ajuste.escala !== 1 ? ajuste.escala : 1
       fijadas[pieza.key] = {
-        left: pieza.left,
-        top: pieza.top,
-        width: pieza.width,
+        left: pieza.left - (ajuste?.dx ?? 0),
+        top: pieza.top - (ajuste?.dy ?? 0),
+        width: pieza.width / escala,
         rotate: pieza.rotate,
         zIndex: pieza.zIndex,
       }
@@ -130,7 +142,7 @@ function Armador({ bundle }: { bundle: BuilderBundle }) {
         ...prev,
         quantities: { ...prev.quantities, [id]: (prev.quantities[id] ?? 0) + 1 },
         // Lo que ya estaba se queda donde esta; la nueva busca hueco.
-        fijadas: congelar(prev.fijadas),
+        fijadas: congelar(prev.fijadas, prev.ajustes),
       }
     })
     track('builder_add_flower', { id })
@@ -156,7 +168,7 @@ function Armador({ bundle }: { bundle: BuilderBundle }) {
       }
 
       const fijadas: typeof prev.fijadas = {}
-      for (const [clave, pos] of Object.entries(congelar(prev.fijadas))) {
+      for (const [clave, pos] of Object.entries(congelar(prev.fijadas, prev.ajustes))) {
         const numero = leerClave(clave, id)
         if (numero === null || numero < quedan) fijadas[clave] = pos
       }
@@ -225,7 +237,7 @@ function Armador({ bundle }: { bundle: BuilderBundle }) {
       }
 
       const fijadas: typeof prev.fijadas = {}
-      for (const [clave, pos] of Object.entries(congelar(prev.fijadas))) {
+      for (const [clave, pos] of Object.entries(congelar(prev.fijadas, prev.ajustes))) {
         const n = leerClave(clave, flowerId)
         if (n === null || n < indice) {
           fijadas[clave] = pos
