@@ -1,0 +1,903 @@
+{
+  "categories": [
+    {
+      "slug": "flores",
+      "title": "Flores",
+      "subtitle": "Individuales",
+      "image": "/categories/flores.webp"
+    },
+    {
+      "slug": "ramos",
+      "title": "Ramos",
+      "subtitle": "Hechos a mano",
+      "image": "/products/3.webp"
+    },
+    {
+      "slug": "macetas",
+      "title": "Macetas",
+      "subtitle": "Decorativas",
+      "image": "/products/5.webp"
+    },
+    {
+      "slug": "munequitos",
+      "title": "Muñequitos",
+      "subtitle": "Hechos con amor",
+      "image": "/products/9.webp"
+    },
+    {
+      "slug": "llaveros",
+      "title": "Llaveros",
+      "subtitle": "Pequeños detalles",
+      "image": "/categories/llaveros.webp"
+    },
+    {
+      "slug": "personalizados",
+      "title": "Personalizados",
+      "subtitle": "Creamos para ti",
+      "image": "/products/16.webp"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Bouquet Liritu",
+      "price": 25000,
+      "category": "ramos",
+      "image": "/products/1.jpg",
+      "description": "Puedes elegir el color de tu preferencia: rosa, morado, azul, amarillo.",
+      "includes": "1 lirio con borde blanco, 1 tulipán de 4 puntas, 3 margaritas y tarjeta personalizada."
+    },
+    {
+      "id": 2,
+      "name": "Bouquet Alianza de Oro",
+      "price": 35000,
+      "category": "ramos",
+      "image": "/products/2.webp",
+      "description": "Los girasoles y las rosas poseen una armonía natural; una combinación clásica que nunca deja de cautivar.",
+      "includes": "1 lirio girasol grande, 1 rosa, 4 margaritas y tarjeta personalizada."
+    },
+    {
+      "id": 3,
+      "name": "Bouquet Valle de Tulipanes",
+      "price": 65000,
+      "category": "ramos",
+      "image": "/products/3.webp",
+      "description": "Puedes elegir el color de tu preferencia: rosa, morado, azul, amarillo.",
+      "includes": "7 tulipanes rellenitos, 6 margaritas y tarjeta personalizada."
+    },
+    {
+      "id": 4,
+      "name": "Bouquet Valentía Eterna",
+      "price": 55000,
+      "category": "ramos",
+      "image": "/products/4.webp",
+      "description": "Tulipanes rojos con espíritu heroico y lleno de alegría.",
+      "includes": "6 tulipanes rellenitos con detalles temáticos, acompañado de 5 margaritas y una tarjeta personalizada."
+    },
+    {
+      "id": 5,
+      "name": "Maceta Rayito de Sol",
+      "price": 15000,
+      "category": "macetas",
+      "image": "/products/5.webp",
+      "description": "Un pequeño detalle lleno de luz y felicidad.",
+      "includes": "1 girasol decorativo en una macetita artesanal con hojas verdes, un detalle tierno y lleno de alegría para cualquier ocasión."
+    },
+    {
+      "id": 6,
+      "name": "Bouquet Sulli",
+      "price": 65000,
+      "category": "ramos",
+      "image": "/products/6.webp",
+      "description": "Inspirado en los tonos del personaje Sullivan, perfecto para cualquier ocasión.",
+      "includes": "3 tulipanes de 4 puntas, 3 lirios con borde en blanco, 8 margaritas, ramita y tarjeta personalizada."
+    },
+    {
+      "id": 7,
+      "name": "Bouquet Noche de Mariposas",
+      "price": 65000,
+      "category": "ramos",
+      "image": "/products/7.webp",
+      "description": "Arreglo luminoso con mariposas decorativas, ideal para sorprender con un regalo único y especial.",
+      "includes": "21 mariposas, luces decorativas, personaje y tarjeta personalizada."
+    },
+    {
+      "id": 8,
+      "name": "Macetas Pequeño Jardín",
+      "price": 15000,
+      "category": "macetas",
+      "image": "/products/8.webp",
+      "description": "Detalle pequeño y encantador que alegra cualquier espacio.",
+      "includes": "1 flor decorativa, hojas verdes, base tipo materita y tarjeta personalizada."
+    },
+    {
+      "id": 9,
+      "name": "Mini figura Dulce Presencia",
+      "price": 35000,
+      "category": "munequitos",
+      "image": "/products/9.webp",
+      "description": "Ternura hecha a mano para acompañar momentos especiales.",
+      "includes": "Figura hecha a mano con corazón decorativo y tarjeta personalizada."
+    },
+    {
+      "id": 10,
+      "name": "Mini figura Amigo Inseparable",
+      "price": 45000,
+      "category": "munequitos",
+      "image": "/products/10.webp",
+      "description": "Un compañero que ilumina cualquier momento.",
+      "includes": "Figura hecha a mano a tu medida y tarjeta personalizada."
+    },
+    {
+      "id": 11,
+      "name": "Bouquet Amanecer Dorado",
+      "price": 65000,
+      "category": "ramos",
+      "image": "/products/11.webp",
+      "description": "La armonía del amarillo y el naranja crea un detalle alegre y memorable.",
+      "includes": "4 tulipanes de 3 puntas, 3 lirios con borde en blanco, 6 margaritas, ramita y tarjeta personalizada."
+    },
+    {
+      "id": 12,
+      "name": "Bouquet Jardín de Lavanda",
+      "price": 65000,
+      "category": "ramos",
+      "image": "/products/12.webp",
+      "description": "Puedes elegir el color de tu preferencia.",
+      "includes": "4 tulipanes de 3 puntas, 3 lirios con borde en blanco, 8 margaritas, ramita, 3 mariposas decorativas y tarjeta personalizada."
+    },
+    {
+      "id": 13,
+      "name": "Mini Bouquet Encanto Carmesí",
+      "price": 25000,
+      "category": "ramos",
+      "image": "/products/13.webp",
+      "description": "Un arreglo delicado y lleno de cariño, ideal para expresar amor y agradecimiento.",
+      "includes": "1 tulipán de 4 puntas, 1 lirio con borde en blanco, 3 margaritas, ramita, 1 mariposa decorativa y tarjeta personalizada."
+    },
+    {
+      "id": 14,
+      "name": "Ramo Pequeño Gran Logro",
+      "price": 65000,
+      "category": "personalizados",
+      "image": "/products/14.webp",
+      "description": "Un detalle que celebra el esfuerzo y el inicio de nuevos sueños.",
+      "includes": "Figura temática hecha a mano, 3 tulipanes de 4 puntas, envoltura especial y tarjeta personalizada."
+    },
+    {
+      "id": 15,
+      "name": "Bouquet Gala de Primavera",
+      "price": 68000,
+      "category": "ramos",
+      "image": "/products/15.webp",
+      "description": "Puedes elegir el color de tu preferencia: rosa, morado, azul, amarillo.",
+      "includes": "4 tulipanes rellenitos, 3 lirios con borde en blanco, 8 margaritas, mariposas y tarjeta personalizada."
+    },
+    {
+      "id": 16,
+      "name": "Bouquet Pequeña Ilusión",
+      "price": 70000,
+      "category": "personalizados",
+      "image": "/products/16.webp",
+      "description": "El detalle perfecto para celebrar momentos especiales.",
+      "includes": "Peluche decorativo, 1 lirio con borde en blanco, 4 tulipanes de 4 puntas, ramitas y tarjeta personalizada."
+    },
+    {
+      "id": 17,
+      "name": "Bouquet Quinteto de Sol",
+      "price": 80000,
+      "category": "ramos",
+      "image": "/products/17.webp",
+      "description": "Un detalle perfecto para traer alegría.",
+      "includes": "5 girasoles medianos, 4 ramitas, 5 margaritas y tarjeta personalizada."
+    }
+  ],
+  "flowers": [
+    {
+      "id": "lirio-rosa",
+      "label": "Lirio rosado",
+      "image": "/builder/flores/lirio-rosa.webp",
+      "role": "face",
+      "w": 300,
+      "h": 292.3,
+      "anchor": {
+        "x": 0.4984,
+        "y": 0.5262
+      }
+    },
+    {
+      "id": "lirio-fucsia",
+      "label": "Lirio fucsia",
+      "image": "/builder/flores/lirio-fucsia.webp",
+      "role": "face",
+      "w": 285,
+      "h": 286,
+      "anchor": {
+        "x": 0.4983,
+        "y": 0.4138
+      }
+    },
+    {
+      "id": "girasol",
+      "label": "Girasol",
+      "image": "/builder/flores/girasol.webp",
+      "role": "face",
+      "w": 285,
+      "h": 288.7,
+      "anchor": {
+        "x": 0.4984,
+        "y": 0.5063
+      }
+    },
+    {
+      "id": "gerbera",
+      "label": "Gerbera",
+      "image": "/builder/flores/gerbera.webp",
+      "role": "face",
+      "w": 235,
+      "h": 227.4,
+      "anchor": {
+        "x": 0.4984,
+        "y": 0.4983
+      }
+    },
+    {
+      "id": "margarita-g",
+      "label": "Margarita grande",
+      "image": "/builder/flores/margarita-g.webp",
+      "role": "face",
+      "w": 200.7,
+      "h": 204.3,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.4983
+      }
+    },
+    {
+      "id": "clavel",
+      "label": "Clavel",
+      "image": "/builder/flores/clavel.webp",
+      "role": "stem",
+      "w": 215.9,
+      "h": 227,
+      "anchor": {
+        "x": 0.4957,
+        "y": 0.437
+      },
+      "stem": {
+        "image": "/builder/flores/clavel-tallo.webp",
+        "w": 215.9,
+        "h": 447.5,
+        "anchor": {
+          "x": 0.4957,
+          "y": 0.2216
+        }
+      }
+    },
+    {
+      "id": "tulipan",
+      "label": "Tulipán",
+      "image": "/builder/flores/tulipan.webp",
+      "role": "stem",
+      "w": 180,
+      "h": 216.8,
+      "anchor": {
+        "x": 0.4981,
+        "y": 0.4503
+      },
+      "stem": {
+        "image": "/builder/flores/tulipan-tallo.webp",
+        "w": 180,
+        "h": 360.7,
+        "anchor": {
+          "x": 0.4981,
+          "y": 0.2707
+        }
+      }
+    },
+    {
+      "id": "rosa",
+      "label": "Rosa",
+      "image": "/builder/flores/rosa.webp",
+      "role": "stem",
+      "w": 151.2,
+      "h": 162.4,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.4582
+      },
+      "stem": {
+        "image": "/builder/flores/rosa-tallo.webp",
+        "w": 151.2,
+        "h": 221.5,
+        "anchor": {
+          "x": 0.5,
+          "y": 0.3361
+        }
+      }
+    },
+    {
+      "id": "lavanda",
+      "label": "Lavanda",
+      "image": "/builder/flores/lavanda.webp",
+      "role": "spike",
+      "w": 95.8,
+      "h": 341.5,
+      "anchor": {
+        "x": 0.492,
+        "y": 0.4913
+      },
+      "stem": {
+        "image": "/builder/flores/lavanda-tallo.webp",
+        "w": 95.8,
+        "h": 372.3,
+        "anchor": {
+          "x": 0.492,
+          "y": 0.4507
+        }
+      }
+    },
+    {
+      "id": "margarita-p",
+      "label": "Margarita pequeña",
+      "image": "/builder/flores/margarita-p-sola.webp",
+      "role": "filler",
+      "w": 110.6,
+      "h": 99.5,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.4912
+      },
+      "stem": {
+        "image": "/builder/flores/margarita-p-tallo.webp",
+        "w": 110,
+        "h": 158.8,
+        "anchor": {
+          "x": 0.4953,
+          "y": 0.3007
+        }
+      }
+    },
+    {
+      "id": "hojas",
+      "label": "Hojas y ramitas",
+      "image": "/builder/flores/hojas.webp",
+      "role": "green",
+      "w": 255.8,
+      "h": 269.7,
+      "anchor": {
+        "x": 0.4864,
+        "y": 0.4077
+      }
+    }
+  ],
+  "wrappers": [
+    {
+      "id": "rosada-grande",
+      "label": "Abrazo Rosa",
+      "size": "Grande",
+      "image": "/builder/envolturas/rosada-grande.webp",
+      "aspect": 0.8954,
+      "cluster": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "clusterR": 0.42,
+      "flowerScale": 1,
+      "knot": {
+        "x": 0.5,
+        "y": 0.78,
+        "w": 0.38
+      },
+      "capacity": 20
+    },
+    {
+      "id": "blanca-grande",
+      "label": "Nube Blanca",
+      "size": "Grande",
+      "image": "/builder/envolturas/blanca-grande.webp",
+      "aspect": 0.8821,
+      "cluster": {
+        "x": 0.5,
+        "y": 0.44
+      },
+      "clusterR": 0.41,
+      "flowerScale": 1,
+      "knot": {
+        "x": 0.5,
+        "y": 0.79,
+        "w": 0.36
+      },
+      "capacity": 20
+    },
+    {
+      "id": "blanca",
+      "label": "Velo de Novia",
+      "size": "Grande",
+      "image": "/builder/envolturas/blanca.webp",
+      "aspect": 0.9301,
+      "cluster": {
+        "x": 0.5,
+        "y": 0.38
+      },
+      "clusterR": 0.43,
+      "flowerScale": 1,
+      "knot": {
+        "x": 0.5,
+        "y": 0.76,
+        "w": 0.36
+      },
+      "capacity": 20
+    },
+    {
+      "id": "azul",
+      "label": "Noche Azul",
+      "size": "Grande",
+      "image": "/builder/envolturas/azul.webp",
+      "aspect": 0.7724,
+      "cluster": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "clusterR": 0.38,
+      "flowerScale": 0.95,
+      "knot": {
+        "x": 0.5,
+        "y": 0.72,
+        "w": 0.34
+      },
+      "capacity": 18
+    },
+    {
+      "id": "mediana",
+      "label": "Dulce Aurora",
+      "size": "Mediana",
+      "image": "/builder/envolturas/mediana.webp",
+      "aspect": 0.6429,
+      "cluster": {
+        "x": 0.5,
+        "y": 0.43
+      },
+      "clusterR": 0.36,
+      "flowerScale": 1.15,
+      "knot": {
+        "x": 0.5,
+        "y": 0.74,
+        "w": 0.34
+      },
+      "capacity": 12
+    },
+    {
+      "id": "blanca-pequena",
+      "label": "Pequeño Tesoro",
+      "size": "Pequeña",
+      "image": "/builder/envolturas/blanca-pequena.webp",
+      "aspect": 0.4493,
+      "cluster": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "clusterR": 0.42,
+      "flowerScale": 2,
+      "knot": {
+        "x": 0.5,
+        "y": 0.56,
+        "w": 0.4
+      },
+      "capacity": 4
+    }
+  ],
+  "ribbons": [
+    {
+      "id": "rosado",
+      "label": "Rosado",
+      "image": "/builder/listones/rosado.webp",
+      "aspect": 0.97
+    },
+    {
+      "id": "azul",
+      "label": "Azul",
+      "image": "/builder/listones/azul.webp",
+      "aspect": 0.97
+    },
+    {
+      "id": "amarillo",
+      "label": "Amarillo",
+      "image": "/builder/listones/amarillo.webp",
+      "aspect": 0.9676
+    },
+    {
+      "id": "rojo",
+      "label": "Rojo",
+      "image": "/builder/listones/rojo.webp",
+      "aspect": 0.97
+    }
+  ],
+  "colorVariants": {
+    "lirio-rosa": {
+      "base": "rosa",
+      "variants": {
+        "morado": {
+          "image": "/builder/flores/lirio-rosa--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/lirio-rosa--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/lirio-rosa--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/lirio-rosa--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/lirio-rosa--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/lirio-rosa--blanco.webp"
+        }
+      }
+    },
+    "lirio-fucsia": {
+      "base": "rosa",
+      "variants": {
+        "morado": {
+          "image": "/builder/flores/lirio-fucsia--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/lirio-fucsia--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/lirio-fucsia--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/lirio-fucsia--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/lirio-fucsia--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/lirio-fucsia--blanco.webp"
+        }
+      }
+    },
+    "girasol": {
+      "base": "amarillo",
+      "variants": {
+        "rosa": {
+          "image": "/builder/flores/girasol--rosa.webp"
+        },
+        "morado": {
+          "image": "/builder/flores/girasol--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/girasol--azul.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/girasol--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/girasol--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/girasol--blanco.webp"
+        }
+      }
+    },
+    "gerbera": {
+      "base": "rosa",
+      "variants": {
+        "morado": {
+          "image": "/builder/flores/gerbera--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/gerbera--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/gerbera--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/gerbera--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/gerbera--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/gerbera--blanco.webp"
+        }
+      }
+    },
+    "margarita-g": {
+      "base": "azul",
+      "variants": {
+        "rosa": {
+          "image": "/builder/flores/margarita-g--rosa.webp"
+        },
+        "morado": {
+          "image": "/builder/flores/margarita-g--morado.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/margarita-g--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/margarita-g--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/margarita-g--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/margarita-g--blanco.webp"
+        }
+      }
+    },
+    "clavel": {
+      "base": "rojo",
+      "variants": {
+        "rosa": {
+          "image": "/builder/flores/clavel--rosa.webp",
+          "stem": "/builder/flores/clavel-tallo--rosa.webp"
+        },
+        "morado": {
+          "image": "/builder/flores/clavel--morado.webp",
+          "stem": "/builder/flores/clavel-tallo--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/clavel--azul.webp",
+          "stem": "/builder/flores/clavel-tallo--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/clavel--amarillo.webp",
+          "stem": "/builder/flores/clavel-tallo--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/clavel--naranja.webp",
+          "stem": "/builder/flores/clavel-tallo--naranja.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/clavel--blanco.webp",
+          "stem": "/builder/flores/clavel-tallo--blanco.webp"
+        }
+      }
+    },
+    "tulipan": {
+      "base": "rosa",
+      "variants": {
+        "morado": {
+          "image": "/builder/flores/tulipan--morado.webp",
+          "stem": "/builder/flores/tulipan-tallo--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/tulipan--azul.webp",
+          "stem": "/builder/flores/tulipan-tallo--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/tulipan--amarillo.webp",
+          "stem": "/builder/flores/tulipan-tallo--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/tulipan--naranja.webp",
+          "stem": "/builder/flores/tulipan-tallo--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/tulipan--rojo.webp",
+          "stem": "/builder/flores/tulipan-tallo--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/tulipan--blanco.webp",
+          "stem": "/builder/flores/tulipan-tallo--blanco.webp"
+        }
+      }
+    },
+    "rosa": {
+      "base": "rojo",
+      "variants": {
+        "rosa": {
+          "image": "/builder/flores/rosa--rosa.webp",
+          "stem": "/builder/flores/rosa-tallo--rosa.webp"
+        },
+        "morado": {
+          "image": "/builder/flores/rosa--morado.webp",
+          "stem": "/builder/flores/rosa-tallo--morado.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/rosa--azul.webp",
+          "stem": "/builder/flores/rosa-tallo--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/rosa--amarillo.webp",
+          "stem": "/builder/flores/rosa-tallo--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/rosa--naranja.webp",
+          "stem": "/builder/flores/rosa-tallo--naranja.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/rosa--blanco.webp",
+          "stem": "/builder/flores/rosa-tallo--blanco.webp"
+        }
+      }
+    },
+    "lavanda": {
+      "base": "morado",
+      "variants": {
+        "rosa": {
+          "image": "/builder/flores/lavanda--rosa.webp",
+          "stem": "/builder/flores/lavanda-tallo--rosa.webp"
+        },
+        "azul": {
+          "image": "/builder/flores/lavanda--azul.webp",
+          "stem": "/builder/flores/lavanda-tallo--azul.webp"
+        },
+        "amarillo": {
+          "image": "/builder/flores/lavanda--amarillo.webp",
+          "stem": "/builder/flores/lavanda-tallo--amarillo.webp"
+        },
+        "naranja": {
+          "image": "/builder/flores/lavanda--naranja.webp",
+          "stem": "/builder/flores/lavanda-tallo--naranja.webp"
+        },
+        "rojo": {
+          "image": "/builder/flores/lavanda--rojo.webp",
+          "stem": "/builder/flores/lavanda-tallo--rojo.webp"
+        },
+        "blanco": {
+          "image": "/builder/flores/lavanda--blanco.webp",
+          "stem": "/builder/flores/lavanda-tallo--blanco.webp"
+        }
+      }
+    }
+  },
+  "colors": [
+    {
+      "id": "rosa",
+      "label": "Rosa",
+      "swatch": "#f2789f"
+    },
+    {
+      "id": "morado",
+      "label": "Morado",
+      "swatch": "#a259d9"
+    },
+    {
+      "id": "azul",
+      "label": "Azul",
+      "swatch": "#3d8ee0"
+    },
+    {
+      "id": "amarillo",
+      "label": "Amarillo",
+      "swatch": "#f2c230"
+    },
+    {
+      "id": "naranja",
+      "label": "Naranja",
+      "swatch": "#ef8b3c"
+    },
+    {
+      "id": "rojo",
+      "label": "Rojo",
+      "swatch": "#e03a3a"
+    },
+    {
+      "id": "blanco",
+      "label": "Blanco",
+      "swatch": "#ffffff"
+    }
+  ],
+  "site": {
+    "whatsapp": {
+      "phone": "573203684500",
+      "displayPhone": "+57 320 368 4500"
+    },
+    "email": "makyp.creations@gmail.com",
+    "instagram": "https://www.instagram.com/makyp_creations/",
+    "tiktok": "https://www.tiktok.com/@makyp_creations",
+    "facebook": "#",
+    "location": "Colombia"
+  },
+  "help": [
+    {
+      "id": "como-comprar",
+      "question": "¿Cómo comprar?",
+      "answer": [
+        "Comprar es sencillo y siempre terminamos de acordar todo por WhatsApp:"
+      ],
+      "list": [
+        "Elige lo que te guste en la tienda, o arma tu propio ramo en “Crear mi ramo”.",
+        "Agrégalo al carrito, o escríbenos directo con el botón de WhatsApp del producto.",
+        "Te confirmamos el precio final y en cuánto tiempo lo tenemos listo.",
+        "Acordamos el pago y la entrega, y manos a la obra."
+      ],
+      "note": "No necesitas crear una cuenta ni pagar en la página."
+    },
+    {
+      "id": "pagos",
+      "question": "Métodos de pago",
+      "answer": [
+        "Puedes pagar de dos formas:"
+      ],
+      "list": [
+        "Transferencia bancaria.",
+        "Efectivo al momento de la entrega."
+      ],
+      "note": "Los datos para la transferencia te los pasamos por WhatsApp al confirmar tu pedido."
+    },
+    {
+      "id": "envios",
+      "question": "Envíos y entregas",
+      "answer": [
+        "Tenemos tres formas de hacerte llegar tu detalle:"
+      ],
+      "list": [
+        "Domicilio dentro de la ciudad.",
+        "Envío a todo Colombia por transportadora.",
+        "Recoger en un punto que acordemos."
+      ],
+      "note": "El costo del envío y la fecha de entrega los confirmamos por WhatsApp, porque dependen de a dónde va y de qué pediste."
+    },
+    {
+      "id": "cambios",
+      "question": "Cambios y devoluciones",
+      "answer": [
+        "Cada detalle se hace a mano y por encargo, así que no manejamos una política automática de devoluciones.",
+        "Si algo no llegó como esperabas, escríbenos por WhatsApp y lo revisamos contigo caso por caso. Nos importa que quedes contenta con tu detalle."
+      ]
+    },
+    {
+      "id": "cuidados",
+      "question": "¿Cómo cuido mi ramo?",
+      "answer": [
+        "Al estar hechos con limpiapipas, tus flores no se marchitan: duran años si las cuidas bien.",
+        "No necesitan agua. Mantenlas lejos de la humedad y del sol directo, y si les cae polvo, sacúdelas suavemente o pásales un secador en aire frío."
+      ]
+    }
+  ],
+  "hero": [
+    {
+      "image": "/hero/ramo-hero.webp",
+      "alt": "Ramo de tulipanes rosados hecho a mano con limpiapipas"
+    },
+    {
+      "image": "/hero/ramo-hero-2.webp",
+      "alt": "Ramo de lirios morados y azules hecho a mano con limpiapipas"
+    },
+    {
+      "image": "/hero/ramo-hero-3.webp",
+      "alt": "Ramo de girasoles hecho a mano con limpiapipas"
+    },
+    {
+      "image": "/hero/ramo-hero-4.webp",
+      "alt": "Ramo de lirios y tulipanes amarillos hecho a mano con limpiapipas"
+    }
+  ],
+  "gallery": [
+    "/products/1.jpg",
+    "/products/3.webp",
+    "/products/6.webp",
+    "/products/9.webp",
+    "/products/11.webp",
+    "/products/15.webp",
+    "/products/17.webp"
+  ],
+  "valueProps": [
+    {
+      "icon": "hand-heart",
+      "title": "100% Artesanal",
+      "description": "Cada pieza está hecha a mano con dedicación."
+    },
+    {
+      "icon": "palette",
+      "title": "Colores vibrantes",
+      "description": "Usamos materiales de calidad para que duren más."
+    },
+    {
+      "icon": "gift",
+      "title": "Perfecto para cualquier ocasión",
+      "description": "Cumpleaños, aniversarios, detalles y más."
+    },
+    {
+      "icon": "messages-square",
+      "title": "Atención personalizada",
+      "description": "Te asesoramos para crear el detalle perfecto."
+    }
+  ]
+}

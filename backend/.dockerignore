@@ -1,0 +1,10 @@
+# Lo que no debe entrar en la imagen.
+.venv/
+__pycache__/
+*.py[cod]
+.env
+*.sqlite3
+media/
+staticfiles/
+scripts/datos_iniciales.json
+.git/
