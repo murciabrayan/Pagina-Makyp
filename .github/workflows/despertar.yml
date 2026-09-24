@@ -1,0 +1,42 @@
+# Visita la API cada diez minutos para que el plan gratuito de Render no
+# apague el servicio.
+#
+# Es el respaldo de backend/scripts/despertador.py, que hace lo mismo desde
+# dentro del servidor. Ese es mas puntual, pero si Render apagara el servicio
+# por otro motivo se apagaria con el. Este corre en GitHub, fuera de Render,
+# y puede despertarlo desde cero.
+#
+# Dos cosas a saber de las tareas programadas de GitHub:
+#   - A veces llegan con retraso en las horas de mas uso. Por eso no va sola.
+#   - GitHub las desactiva si el repositorio pasa 60 dias sin ningun commit.
+#     Si eso pasa, se reactivan en la pestana Actions con un clic.
+#
+# Visita /api/salud/, que responde sin tocar la base de datos, para no
+# mantener encendida a Neon, que cobra por horas encendida.
+
+name: Despertar el servidor
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  # Para lanzarla a mano desde la pestana Actions y comprobar que funciona.
+  workflow_dispatch:
+
+env:
+  DIRECCION: https://pagina-makyp.onrender.com/api/salud/
+
+jobs:
+  visitar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Visitar la API
+        # Hasta 100 segundos de espera: si el servicio estaba dormido, tarda
+        # casi un minuto en contestar, y esta visita es justo la que lo
+        # despierta.
+        run: >
+          curl --fail --silent --show-error
+          --max-time 100 --retry 2 --retry-delay 15
+          --output /dev/null
+          --write-out "HTTP %{http_code} en %{time_total} s\n"
+          "$DIRECCION"

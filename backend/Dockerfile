@@ -30,12 +30,20 @@ COPY . .
 ENV PORT=8000
 EXPOSE 8000
 
-# El arranque hace tres cosas, en este orden:
+# El arranque hace cuatro cosas, en este orden:
 #   1. migrate      pone la base al dia antes de atender nada
 #   2. collectstatic reune los archivos del panel de Django
-#   3. gunicorn     sirve la aplicacion
+#   3. despertador  queda de fondo visitando la API cada diez minutos, para
+#                   que el plan gratuito no apague el servicio (ver
+#                   scripts/despertador.py)
+#   4. gunicorn     sirve la aplicacion
+#
+# El despertador va entre llaves con su & dentro. Sin las llaves, el & se
+# llevaria al fondo toda la cadena anterior, migraciones incluidas, y
+# gunicorn arrancaria sin esperar a que terminen. `exec` hace que gunicorn
+# reemplace al shell y reciba directamente la orden de apagado de Render.
 #
 # collectstatic va aqui y no en la construccion porque necesita la
 # configuracion real (la clave secreta, la base), y esa solo existe al
 # desplegar.
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 60 --access-logfile - --error-logfile -"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py collectstatic --noinput && { python scripts/despertador.py & } && exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 60 --access-logfile - --error-logfile -"]

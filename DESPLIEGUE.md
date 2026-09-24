@@ -199,30 +199,41 @@ Listo: `https://makyp-6ed4d.web.app`.
 
 ## Paso 6 · Que no se duerma
 
+**Ya está hecho, no hay que configurar nada.** Queda aquí para que sepas cómo
+funciona.
+
 Render apaga la API a los 15 minutos sin visitas, y despertarla tarda casi un
-minuto. La tienda **ya no se queda en blanco** mientras tanto: arranca con una
-copia del catálogo que va dentro de ella (ver *Después*). Pero durante ese
-minuto no llegan los cambios que Maira haya hecho desde la última
-publicación, y el panel sí tiene que esperar. Con esto no se llega a dormir.
+minuto. La tienda no se queda en blanco mientras tanto (arranca con la copia
+del catálogo, ver *Después*), pero no llegan los cambios recientes de Maira y
+el panel sí tiene que esperar. Para que no llegue a dormirse hay dos
+despertadores, cada uno cubriendo el punto débil del otro:
 
-1. Entra en [cron-job.org](https://cron-job.org) y crea una cuenta. Es
-   gratis y **no pide tarjeta**.
-2. **Create cronjob**:
-   - **Title:** `Despertar Makyp`
-   - **URL:** `https://tu-servicio.onrender.com/api/salud/`
-   - **Schedule:** cada **10 minutos**
-3. Guardar. A los pocos minutos verás la primera ejecución en verde.
+| | Dónde corre | Cada cuánto | Su punto débil |
+| --- | --- | --- | --- |
+| `backend/scripts/despertador.py` | Dentro del servidor, junto a Django | 10 minutos exactos | Si Render apaga el servicio por otro motivo, se apaga con él |
+| `.github/workflows/despertar.yml` | En GitHub, fuera de Render | 10 minutos, a veces con retraso | GitHub retrasa estas tareas en horas punta |
 
-Con una visita cada 10 minutos el servicio no llega nunca a los 15 de
-inactividad, así que se queda despierto.
-
-`/api/salud/` existe justo para esto: responde `{"estado": "ok"}` **sin
-consultar la base**. Si el ping apuntara a `/api/bootstrap/`, mantendría
+Los dos visitan `/api/salud/`, que responde `{"estado": "ok"}` **sin
+consultar la base**. Si visitaran algo como `/api/bootstrap/`, mantendrían
 encendida también a Neon las 24 horas, y Neon se cobra por horas encendida.
-Así la base solo despierta cuando entra una persona de verdad. El plan gratuito de Render da 750
-horas de servicio al mes y un mes tiene 730, así que estar encendido las 24
-horas **cabe justo** dentro de lo gratuito. Por eso conviene tener un solo
+Así la base solo despierta cuando entra una persona de verdad.
+
+El plan gratuito de Render da 750 horas al mes y un mes tiene 730, así que
+estar encendido las 24 horas **cabe justo**. Por eso conviene tener un solo
 servicio gratuito en esa cuenta: dos encendidos a la vez sí se pasarían.
+
+**Cómo comprobar que funcionan:**
+
+- El de dentro: en Render, pestaña **Logs**, cada 10 minutos aparece una
+  línea `despertador: ok, HTTP 200 en ... ms`.
+- El de GitHub: en el repositorio, pestaña **Actions** → *Despertar el
+  servidor*. Cada ejecución en verde es una visita. Desde ahí también se
+  puede lanzar a mano con **Run workflow**.
+
+**Lo único a vigilar:** GitHub desactiva las tareas programadas si el
+repositorio pasa **60 días sin ningún commit**. Te avisa por correo, y se
+reactiva en la pestaña **Actions** con un clic. Mientras tanto el de dentro
+del servidor sigue funcionando solo.
 
 ---
 
@@ -245,8 +256,8 @@ Repasa esto antes de darlo por bueno:
 Los dos últimos puntos son los que confirman que el almacenamiento y el ping
 están bien puestos. Si la foto desapareció, es que se guardó en el disco del
 servidor y se perdió en el siguiente despliegue: repasa las cinco variables
-`R2_`. Si la tienda tardó casi un minuto en abrir, mira las ejecuciones del
-cron-job: alguna estará en rojo.
+`R2_`. Si el panel tardó casi un minuto en abrir, el servicio se durmió:
+mira los dos despertadores como explica el paso 6.
 
 ---
 
