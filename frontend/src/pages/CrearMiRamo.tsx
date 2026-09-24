@@ -23,7 +23,7 @@ import type {
 
 export function CrearMiRamo() {
   useTitulo('Arma tu ramo')
-  const { datos, cargando, error, recargar } = useRecurso<BuilderBundle>('/builder/bundle/')
+  const { datos, cargando, error, recargar } = useRecurso<BuilderBundle>('/builder/bundle/', { instantanea: true })
 
   return (
     <Layout>

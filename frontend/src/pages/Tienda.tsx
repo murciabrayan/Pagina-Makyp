@@ -19,7 +19,7 @@ import type { Product } from '@/types'
 export function Tienda() {
   useTitulo('Tienda')
   const { categories, site } = useContent()
-  const { datos, cargando, error, recargar } = useRecurso<Product[]>('/catalog/products/')
+  const { datos, cargando, error, recargar } = useRecurso<Product[]>('/catalog/products/', { instantanea: true })
   const [searchParams, setSearchParams] = useSearchParams()
   const activeFilter = searchParams.get('categoria') ?? 'todos'
   const [query, setQuery] = useState('')

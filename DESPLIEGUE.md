@@ -199,8 +199,11 @@ Listo: `https://makyp-6ed4d.web.app`.
 
 ## Paso 6 · Que no se duerma
 
-Sin esto, Render apaga la API a los 15 minutos y la siguiente clienta que
-abra el enlace espera casi un minuto mirando una pantalla en blanco.
+Render apaga la API a los 15 minutos sin visitas, y despertarla tarda casi un
+minuto. La tienda **ya no se queda en blanco** mientras tanto: arranca con una
+copia del catálogo que va dentro de ella (ver *Después*). Pero durante ese
+minuto no llegan los cambios que Maira haya hecho desde la última
+publicación, y el panel sí tiene que esperar. Con esto no se llega a dormir.
 
 1. Entra en [cron-job.org](https://cron-job.org) y crea una cuenta. Es
    gratis y **no pide tarjeta**.
@@ -227,9 +230,11 @@ servicio gratuito en esa cuenta: dos encendidos a la vez sí se pasarían.
 
 Repasa esto antes de darlo por bueno:
 
-- [ ] La tienda carga y **se ven los productos** (si salen vacíos, es CORS:
-      revisa que `DJANGO_CORS_ALLOWED_ORIGINS` lleve exactamente el dominio
-      de Firebase, con `https://` y sin barra final)
+- [ ] Desde el panel, **cambia el nombre de un producto** y comprueba que
+      la tienda muestra el nombre nuevo. Mirar solo si se ven productos ya no
+      sirve: salen de la copia aunque la API esté rota. Si sigue el nombre
+      viejo, es CORS: revisa que `DJANGO_CORS_ALLOWED_ORIGINS` lleve
+      exactamente el dominio de Firebase, con `https://` y sin barra final.
 - [ ] El armador muestra las flores y deja armar un ramo
 - [ ] `/admin/login` te deja entrar con el usuario del paso 4
 - [ ] Desde el panel, **sube una foto** a un producto y compruebas que se ve
@@ -251,6 +256,18 @@ cron-job: alguna estará en rojo.
 redespliega solo, aplicando las migraciones nuevas.
 
 **Para actualizar la tienda**, `npm run build` y `firebase deploy`.
+
+**La copia del catálogo.** Antes de compilar, `npm run build` pide el
+catálogo a la API y guarda una copia en `frontend/src/data/instantanea.json`,
+que viaja dentro de la tienda. Es lo que se ve en el primer instante, y lo que
+evita la tienda en blanco si Render está dormido o caído; en cuanto la API
+responde, se cambia por la versión en vivo.
+
+Esa copia se queda como estaba en la última publicación. Si Maira hace
+cambios grandes (productos nuevos, precios), vale la pena volver a publicar
+la tienda para renovarla, aunque no hayas tocado código. Si al compilar la API
+no responde, se conserva la copia anterior y la compilación sigue: nunca se
+publica una copia vacía.
 
 ### Si algún día tienes dominio propio
 

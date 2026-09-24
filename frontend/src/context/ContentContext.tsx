@@ -9,19 +9,20 @@ import {
 } from 'react'
 import { api } from '@/lib/api'
 import { contactoDeRespaldo } from '@/data/respaldo'
+import { instantanea } from '@/lib/instantanea'
 import type { Bootstrap, ContentContextValue } from '@/types'
 
 const ContentContext = createContext<ContentContextValue | null>(null)
 
 /**
- * Lo mínimo para que la página no aparezca vacía mientras carga, y para que
- * siga sirviendo de algo si el servidor no responde.
+ * Lo mínimo para que la página se sostenga si no hay nada más: el contacto,
+ * para que el visitante pueda escribir por WhatsApp aunque todo falle.
  *
- * Lleva solo el teléfono, y es deliberado: si el backend se cae, el visitante
- * tiene que poder escribir por WhatsApp de todos modos, porque ahí es donde
- * se cierra la venta. Lo que NO lleva son productos ni precios. Un catálogo
- * de respaldo se quedaría viejo sin que nadie lo note, y un cliente pidiendo
- * a un precio que ya no existe es peor que una tienda que avisa que no cargó.
+ * En producción casi nunca se usa, porque la tienda arranca con la copia del
+ * catálogo que viaja dentro de ella (ver lib/instantanea.ts). Antes se
+ * arrancaba siempre vacío para no mostrar precios viejos, pero con el
+ * servidor gratuito dormido eso dejaba la tienda en blanco casi un minuto,
+ * que es peor: la copia solo se ve hasta que llega la versión en vivo.
  */
 const VACIO: Bootstrap = {
   site: contactoDeRespaldo,
@@ -33,18 +34,24 @@ const VACIO: Bootstrap = {
 }
 
 export function ContentProvider({ children }: { children: ReactNode }) {
-  const [datos, setDatos] = useState<Bootstrap>(VACIO)
-  const [cargando, setCargando] = useState(true)
+  const [datos, setDatos] = useState<Bootstrap>(() => instantanea<Bootstrap>('/bootstrap/') ?? VACIO)
+  const [cargando, setCargando] = useState(() => instantanea('/bootstrap/') === null)
   const [error, setError] = useState<string | null>(null)
 
   const cargar = useCallback(async (signal?: AbortSignal) => {
-    setCargando(true)
+    const hayCopia = instantanea('/bootstrap/') !== null
+    setCargando(!hayCopia)
     setError(null)
     try {
       const bootstrap = await api.get<Bootstrap>('/bootstrap/', signal)
-      setDatos(bootstrap)
+      // Igual que la copia: se deja la que hay para no repintar por nada.
+      setDatos((previo) =>
+        JSON.stringify(previo) === JSON.stringify(bootstrap) ? previo : bootstrap,
+      )
     } catch (fallo) {
       if (signal?.aborted) return
+      // Con la copia en pantalla la tienda sigue completa: no hay que avisar.
+      if (hayCopia) return
       setError(fallo instanceof Error ? fallo.message : 'No se pudo cargar el contenido.')
     } finally {
       if (!signal?.aborted) setCargando(false)
